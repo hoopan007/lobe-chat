@@ -31,6 +31,7 @@ import { default as openai } from './openai';
 import { default as openrouter } from './openrouter';
 import { default as perplexity } from './perplexity';
 import { default as qwen } from './qwen';
+import { default as sambanova } from './sambanova';
 import { default as sensenova } from './sensenova';
 import { default as siliconcloud } from './siliconcloud';
 import { default as spark } from './spark';
@@ -39,6 +40,7 @@ import { default as taichu } from './taichu';
 import { default as tencentcloud } from './tencentcloud';
 import { default as togetherai } from './togetherai';
 import { default as upstage } from './upstage';
+import { default as vertexai } from './vertexai';
 import { default as vllm } from './vllm';
 import { default as volcengine } from './volcengine';
 import { default as wenxin } from './wenxin';
@@ -97,6 +99,7 @@ export const LOBE_DEFAULT_MODEL_LIST = buildDefaultModelList({
   openrouter,
   perplexity,
   qwen,
+  sambanova,
   sensenova,
   siliconcloud,
   spark,
@@ -105,6 +108,7 @@ export const LOBE_DEFAULT_MODEL_LIST = buildDefaultModelList({
   tencentcloud,
   togetherai,
   upstage,
+  vertexai,
   vllm,
   volcengine,
   wenxin,
@@ -144,6 +148,7 @@ export { default as openai } from './openai';
 export { default as openrouter } from './openrouter';
 export { default as perplexity } from './perplexity';
 export { default as qwen } from './qwen';
+export { default as sambanova } from './sambanova';
 export { default as sensenova } from './sensenova';
 export { default as siliconcloud } from './siliconcloud';
 export { default as spark } from './spark';
@@ -152,6 +157,7 @@ export { default as taichu } from './taichu';
 export { default as tencentcloud } from './tencentcloud';
 export { default as togetherai } from './togetherai';
 export { default as upstage } from './upstage';
+export { default as vertexai } from './vertexai';
 export { default as vllm } from './vllm';
 export { default as volcengine } from './volcengine';
 export { default as wenxin } from './wenxin';

@@ -11,16 +11,17 @@ import { ActionKeys } from '@/features/ChatInput/ActionBar/config';
 import STT from '@/features/ChatInput/STT';
 import SaveTopic from '@/features/ChatInput/Topic';
 import { useSendMessage } from '@/features/ChatInput/useSend';
+import { useInitAgentConfig } from '@/hooks/useInitAgentConfig';
 import { useChatStore } from '@/store/chat';
 import { chatSelectors } from '@/store/chat/selectors';
 
-import { useInitAgentConfig } from '../../../../_layout/useInitAgentConfig';
 import Files from './Files';
 import InputArea from './InputArea';
 import SendButton from './Send';
 
 const defaultLeftActions: ActionKeys[] = [
   'model',
+  'search',
   'fileUpload',
   'knowledgeBase',
   'history',
