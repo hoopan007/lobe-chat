@@ -1,11 +1,7 @@
 name: Database Schema Visualization CI
 
 on:
-  push:
-    branches:
-      - main
-    paths:
-      - 'docs/developer/database-schema.dbml'
+  workflow_dispatch:
 
 jobs:
   build:
