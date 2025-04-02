@@ -68,6 +68,34 @@ export const getUserFileStorage = async (userId: string): Promise<UserFileStorag
   }
 };
 
+export interface UserVectorStorage {
+  active_count: number;
+  total_count: number;
+  used_count: number;
+}
+
+// 查询用户向量存储
+export const getUserVectorStorage = async (userId: string): Promise<UserVectorStorage> => {
+  try {
+    const response = await api.get<{ code: number; data: UserVectorStorage; message: string }>(
+      '/gateway/user-subscriptions/get-user-vector-storage',
+      {
+        app_id: AppId,
+        sso_user_id: userId,
+      },
+    );
+    const { data, code, message } = response;
+    if (code === 0) {
+      return data;
+    } else {
+      throw new Error(message || 'Unknown error');
+    }
+  } catch (error) {
+    console.error('Failed to get user vector storage:', error);
+    return { active_count: 0, total_count: 0, used_count: 0 };
+  }
+};
+
 // POST 请求
 // const createData = async () => {
 //   try {

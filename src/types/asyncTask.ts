@@ -18,6 +18,10 @@ export enum AsyncTaskErrorType {
   NoChunkError = 'NoChunkError',
   ServerError = 'ServerError',
   /**
+   * 向量存储空间不足
+   */
+  StorageExceeded = 'StorageExceeded',
+  /**
    * this happens when the task is not trigger successfully
    */
   TaskTriggerError = 'TaskTriggerError',

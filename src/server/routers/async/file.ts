@@ -25,6 +25,7 @@ import {
 } from '@/types/asyncTask';
 import { safeParseJSON } from '@/utils/safeParseJSON';
 import { sanitizeUTF8 } from '@/utils/sanitizeUTF8';
+import { getUserVectorStorage } from '@/libs/api/rylai';
 
 const fileProcedure = asyncAuthedProcedure.use(async (opts) => {
   const { ctx } = opts;
@@ -226,6 +227,18 @@ export const fileRouter = router({
               message:
                 'No chunk found in this file. it may due to current chunking method can not parse file accurately',
               name: AsyncTaskErrorType.NoChunkError,
+            };
+          }
+
+          // 检查用户向量存储剩余额度
+          const vectorStorage = await getUserVectorStorage(ctx.userId);
+          const activeCount = vectorStorage.active_count || 0;
+          
+          // 如果分割的文本块数量超过可用额度，则抛出错误
+          if (chunks.length > activeCount) {
+            throw {
+              message: `Not enough vector storage space. Available: ${activeCount}, Required: ${chunks.length}`,
+              name: AsyncTaskErrorType.StorageExceeded,
             };
           }
 
