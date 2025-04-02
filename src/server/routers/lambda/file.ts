@@ -11,6 +11,7 @@ import { S3 } from '@/server/modules/S3';
 import { getFullFileUrl } from '@/server/utils/files';
 import { AsyncTaskStatus, AsyncTaskType } from '@/types/asyncTask';
 import { FileListItem, QueryFileListSchema, UploadFileSchema } from '@/types/files';
+import { getUserFileStorage, UserFileStorage } from '@/libs/api/rylai';
 
 const fileProcedure = authedProcedure.use(async (opts) => {
   const { ctx } = opts;
@@ -29,6 +30,17 @@ export const fileRouter = router({
     .input(z.object({ hash: z.string() }))
     .mutation(async ({ ctx, input }) => {
       return ctx.fileModel.checkHash(input.hash);
+    }),
+
+  checkUserStorage: fileProcedure
+    .mutation(async ({ ctx }) => {
+      try {
+        const storage = await getUserFileStorage(ctx.userId);
+        return storage;
+      } catch (error) {
+        console.error('Failed to get user file storage:', error);
+        return { active_size: 0, total_size: 0, used_size: 0 } as UserFileStorage;
+      }
     }),
 
   createFile: fileProcedure

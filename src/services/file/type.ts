@@ -1,7 +1,9 @@
 import { CheckFileHashResult, FileItem, UploadFileParams } from '@/types/files';
+import { UserFileStorage } from '@/libs/api/rylai';
 
 export interface IFileService {
   checkFileHash(hash: string): Promise<CheckFileHashResult>;
+  checkUserStorage(): Promise<UserFileStorage>;
   createFile(
     file: UploadFileParams,
     knowledgeBaseId?: string,

@@ -64,6 +64,24 @@ export const createFileUploadSlice: StateCreator<
   uploadBase64FileWithProgress: async (base64) => {
     const { metadata, fileType, size, hash } = await uploadService.uploadBase64ToS3(base64);
 
+    // 检查存储空间是否足够
+    try {
+      const storage = await fileService.checkUserStorage();
+      if (storage.active_size < size) {
+        message.error({
+          content: t('upload.storageNotEnough', {
+            available: Math.floor(storage.active_size / 1024 / 1024),
+            ns: 'error',
+            required: Math.ceil(size / 1024 / 1024),
+          }),
+          duration: 5,
+        });
+        return;
+      }
+    } catch (error) {
+      console.error('Failed to check user storage:', error);
+    }
+
     const res = await fileService.createFile({
       fileType,
       hash,
@@ -76,6 +94,25 @@ export const createFileUploadSlice: StateCreator<
   },
   uploadWithProgress: async ({ file, onStatusUpdate, knowledgeBaseId, skipCheckFileType }) => {
     const fileArrayBuffer = await file.arrayBuffer();
+
+    // 检查存储空间是否足够
+    try {
+      const storage = await fileService.checkUserStorage();
+      if (storage.active_size < file.size) {
+        onStatusUpdate?.({ id: file.name, type: 'removeFile' });
+        message.error({
+          content: t('upload.storageNotEnough', {
+            available: Math.floor(storage.active_size / 1024 / 1024),
+            ns: 'error',
+            required: Math.ceil(file.size / 1024 / 1024),
+          }),
+          duration: 5,
+        });
+        return;
+      }
+    } catch (error) {
+      console.error('Failed to check user storage:', error);
+    }
 
     // 1. check file hash
     const hash = sha256(fileArrayBuffer);

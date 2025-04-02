@@ -71,6 +71,10 @@ export class ClientService implements IFileService {
     return FileModel.clear();
   }
 
+  async checkUserStorage() {
+    return { active_size: Number.MAX_SAFE_INTEGER, total_size: Number.MAX_SAFE_INTEGER, used_size: 0 };
+  }
+
   private async getBase64ByFileHash(hash: string) {
     const fileItem = await clientS3Storage.getObject(hash);
     if (!fileItem) throw new Error('file not found');

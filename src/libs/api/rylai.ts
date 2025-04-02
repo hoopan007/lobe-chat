@@ -40,6 +40,34 @@ export const getUserSubscription = async (userId: string): Promise<UserSubscript
   }
 };
 
+export interface UserFileStorage {
+  active_size: number;
+  total_size: number;
+  used_size: number;
+}
+
+// 查询用户文件存储
+export const getUserFileStorage = async (userId: string): Promise<UserFileStorage> => {
+  try {
+    const response = await api.get<{ code: number; data: UserFileStorage; message: string }>(
+      '/gateway/user-subscriptions/get-user-file-storage',
+      {
+        app_id: AppId,
+        sso_user_id: userId,
+      },
+    );
+    const { data, code, message } = response;
+    if (code === 0) {
+      return data;
+    } else {
+      throw new Error(message || 'Unknown error');
+    }
+  } catch (error) {
+    console.error('Failed to get user file storage:', error);
+    return { active_size: 0, total_size: 0, used_size: 0 };
+  }
+};
+
 // POST 请求
 // const createData = async () => {
 //   try {

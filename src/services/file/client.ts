@@ -2,6 +2,7 @@ import { clientDB } from '@/database/client/db';
 import { FileModel } from '@/database/server/models/file';
 import { BaseClientService } from '@/services/baseClientService';
 import { clientS3Storage } from '@/services/file/ClientS3';
+import { UserFileStorage } from '@/libs/api/rylai';
 
 import { IFileService } from './type';
 
@@ -74,6 +75,10 @@ export class ClientService extends BaseClientService implements IFileService {
 
   checkFileHash: IFileService['checkFileHash'] = async (hash) => {
     return this.fileModel.checkHash(hash);
+  };
+
+  checkUserStorage: IFileService['checkUserStorage'] = async () => {
+    return { active_size: Number.MAX_SAFE_INTEGER, total_size: Number.MAX_SAFE_INTEGER, used_size: 0 } as UserFileStorage;
   };
 
   private getBase64ByFileHash = async (hash: string) => {

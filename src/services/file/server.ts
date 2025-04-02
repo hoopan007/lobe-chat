@@ -47,6 +47,10 @@ export class ServerService implements IFileService {
     return lambdaClient.file.checkFileHash.mutate({ hash });
   };
 
+  checkUserStorage: IFileService['checkUserStorage'] = async () => {
+    return lambdaClient.file.checkUserStorage.mutate();
+  };
+
   removeFileAsyncTask = async (id: string, type: 'embedding' | 'chunk') => {
     return lambdaClient.file.removeFileAsyncTask.mutate({ id, type });
   };
