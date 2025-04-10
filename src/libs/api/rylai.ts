@@ -10,12 +10,8 @@ const api = new ApiClient(process.env.RYLAI_API_URL || '', {
 });
 
 export interface UserSubscription {
-  is_subscribed?: number;
-  oneai_base_url?: string;
-  oneai_token?: string;
-  plan_id?: number;
-  user_subscription_id?: number;
-  valid_until?: string;
+  credits_token: string;
+  status: string;
 }
 
 // 查询用户订阅
@@ -36,7 +32,7 @@ export const getUserSubscription = async (userId: string): Promise<UserSubscript
     }
   } catch (error) {
     console.error('Failed to get user subscription:', error);
-    return {};
+    return { credits_token: '', status: '500' };
   }
 };
 

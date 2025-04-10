@@ -105,7 +105,11 @@
     "SubscriptionKeyMismatch": "We apologize for the inconvenience. Due to a temporary system malfunction, your current subscription usage is inactive. Please click the button below to restore your subscription, or contact us via email for support.",
     "SubscriptionPlanLimit": "Your subscription points have been exhausted, and you cannot use this feature. Please upgrade to a higher plan or configure a custom model API to continue using it.",
     "SystemTimeNotMatchError": "Sorry, your system time does not match the server. Please check your system time and try again.",
-    "UnknownChatFetchError": "Sorry, an unknown request error occurred. Please check the information below or try again."
+    "UnknownChatFetchError": "Sorry, an unknown request error occurred. Please check the information below or try again.",
+    "SubscriptionRequired": "You need to subscribe to use this feature. Please upgrade your account to gain access.",
+    "SubscriptionExpired": "Your subscription has expired. Please renew to continue using this feature.",
+    "SubscriptionLimited": "Your monthly credits have been exhausted. Please upgrade your account to gain more credits or wait for the next month to reset.",
+    "SubscriptionError": "Subscription request error, please contact the administrator to solve"
   },
   "stt": {
     "responseError": "Service request failed, please check the configuration or try again"
@@ -145,5 +149,19 @@
     "title": "File upload failed. Please check your network connection or try again later",
     "unknownError": "Error reason: {{reason}}",
     "uploadFailed": "File upload failed."
+  },
+  "subscription": {
+    "cta": {
+      "inactive": "Subscribe Now",
+      "expired": "Renew Subscription",
+      "upgrade": "Upgrade Plan",
+      "limited": "Upgrade Plan"
+    },
+    "links": {
+      "inactive": "https://lobehub.com/pricing",
+      "expired": "https://lobehub.com/pricing",
+      "upgrade": "https://lobehub.com/pricing",
+      "limited": "https://lobehub.com/pricing"
+    }
   }
 }

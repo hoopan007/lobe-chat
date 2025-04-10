@@ -34,6 +34,12 @@ export const ChatErrorType = {
   BadGateway: 502,
   ServiceUnavailable: 503,
   GatewayTimeout: 504,
+
+  // 新增订阅相关的错误类型
+  SubscriptionRequired: 'SubscriptionRequired',
+  SubscriptionExpired: 'SubscriptionExpired',
+  SubscriptionLimited: 'SubscriptionLimited',
+  SubscriptionError: 'SubscriptionError',
 } as const;
 /* eslint-enable */
 

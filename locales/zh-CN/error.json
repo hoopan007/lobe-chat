@@ -105,7 +105,11 @@
     "FreePlanLimit": "当前为免费用户，无法使用该功能，请升级到付费计划后继续使用",
     "SubscriptionPlanLimit": "您的订阅积分已用尽，无法使用该功能，请升级到更高计划，或配置自定义模型 API 后继续使用",
     "InvalidGithubToken": "Github PAT 不正确或为空，请检查 Github PAT 后重试",
-    "ConnectionCheckFailed": "请求返回为空，请检查 API 代理地址末尾是否未包含 `/v1`"
+    "ConnectionCheckFailed": "请求返回为空，请检查 API 代理地址末尾是否未包含 `/v1`",
+    "SubscriptionRequired": "您需要订阅才能使用此功能。请升级您的账户以获得访问权限。",
+    "SubscriptionExpired": "您的订阅已过期。请续订以继续使用此功能。",
+    "SubscriptionLimited": "您的当月积分已用尽。请升级您的账户以获得更多积分或等待下个月重置。",
+    "SubscriptionError": "订阅请求出错，请联系管理员解决"
   },
   "stt": {
     "responseError": "服务请求失败，请检查配置或重试"
@@ -145,5 +149,19 @@
     "title": "文件上传失败，请检查网络连接或稍后再试",
     "unknownError": "错误原因: {{reason}}",
     "uploadFailed": "文件上传失败"
+  },
+  "subscription": {
+    "cta": {
+      "inactive": "立即订阅",
+      "expired": "续订订阅",
+      "upgrade": "升级计划",
+      "limited": "升级计划"
+    },
+    "links": {
+      "inactive": "https://lobehub.com/pricing",
+      "expired": "https://lobehub.com/pricing",
+      "upgrade": "https://lobehub.com/pricing",
+      "limited": "https://lobehub.com/pricing"
+    }
   }
 }

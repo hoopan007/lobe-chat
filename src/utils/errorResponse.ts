@@ -12,6 +12,14 @@ const getStatus = (errorType: ILobeAgentRuntimeErrorType | ErrorType) => {
       return 401;
     }
 
+    // 添加新的订阅错误状态
+    case ChatErrorType.SubscriptionRequired:
+    case ChatErrorType.SubscriptionExpired:
+    case ChatErrorType.SubscriptionLimited:
+    case ChatErrorType.SubscriptionError: {
+      return 401;
+    }
+
     case AgentRuntimeErrorType.ExceededContextWindow:
     case ChatErrorType.SubscriptionKeyMismatch:
     case ChatErrorType.SystemTimeNotMatchError: {

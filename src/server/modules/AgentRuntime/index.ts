@@ -10,6 +10,7 @@ import {
 import { AgentRuntime, ChatStreamPayload, ModelProvider } from '@/libs/agent-runtime';
 import { getUserSubscription } from '@/libs/api/rylai';
 import { TraceClient } from '@/libs/traces';
+import { ChatErrorType } from '@/types/fetch';
 
 import apiKeyManager from './apiKeyManager';
 
@@ -138,14 +139,43 @@ export const initAgentRuntimeWithUserPayload = async (
         throw new Error('ONEAI_API_URL is not set');
       }
       const subscription = await getUserSubscription(payload.userId);
-      if (subscription.is_subscribed === 1) {
+      if (subscription.status === '200') {
         payload.baseURL = process.env.ONEAI_API_URL;
-        payload.apiKey = subscription.oneai_token;
+        payload.apiKey = subscription.credits_token;
       } else {
-        throw new Error('User is not subscribed');
+        // 根据subscription status返回不同错误类型
+        const subscriptionStatus = subscription.status;
+        let errorType = '';
+        
+        // 根据状态设置不同的错误类型
+        switch (subscriptionStatus) {
+          case '401':
+            errorType = ChatErrorType.SubscriptionRequired as any;
+            break;
+          case '402':
+            errorType = ChatErrorType.SubscriptionExpired as any;
+            break;
+          case '403':
+            errorType = ChatErrorType.SubscriptionLimited as any;
+            break;
+          default:
+            errorType = ChatErrorType.SubscriptionError as any;
+        }
+        
+        // 不要抛出普通错误，使用createErrorResponse
+        throw {
+          body: { 
+            provider,
+            subscriptionStatus
+          },
+          errorType,
+          message: `User subscription error: ${subscriptionStatus}`
+        };
       }
-    } catch (error) {
+    } catch (error: any) {
       console.error('Failed to get user subscription:', error);
+      
+      throw error;
     }
   }
 

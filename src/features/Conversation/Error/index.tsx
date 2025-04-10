@@ -14,6 +14,7 @@ import ClerkLogin from './ClerkLogin';
 import ErrorJsonViewer from './ErrorJsonViewer';
 import InvalidAPIKey from './InvalidAPIKey';
 import InvalidAccessCode from './InvalidAccessCode';
+import SubscriptionError from './SubscriptionError';
 import { ErrorActionContainer } from './style';
 
 const loading = () => <Skeleton active />;
@@ -92,6 +93,17 @@ const ErrorMessageExtra = memo<{ data: ChatMessage }>(({ data }) => {
     /* ↓ cloud slot ↓ */
 
     /* ↑ cloud slot ↑ */
+
+    case ChatErrorType.SubscriptionRequired:
+    case ChatErrorType.SubscriptionExpired:
+    case ChatErrorType.SubscriptionLimited:
+    case ChatErrorType.SubscriptionError: {
+      console.log('subscription error', error)
+      return <SubscriptionError 
+        id={data.id} 
+        subscriptionStatus={error?.body?.subscriptionStatus} 
+      />;
+    }
 
     case ChatErrorType.InvalidClerkUser: {
       return <ClerkLogin id={data.id} />;

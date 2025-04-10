@@ -134,6 +134,12 @@ export default {
     ConnectionCheckFailed: '请求返回为空，请检查 API 代理地址末尾是否未包含 `/v1`',
 
     /* eslint-enable */
+
+    // 订阅相关错误
+    SubscriptionError: '订阅请求出错，请联系管理员解决',
+    SubscriptionExpired: '您的订阅已过期。请续订以继续使用此功能。',
+    SubscriptionLimited: '您的当月积分已用尽。请升级您的账户以获得更多积分或等待下个月重置。',
+    SubscriptionRequired: '您需要订阅才能使用此功能。请升级您的账户以获得访问权限。',
   },
   stt: {
     responseError: '服务请求失败，请检查配置或重试',
