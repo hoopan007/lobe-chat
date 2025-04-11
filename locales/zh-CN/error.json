@@ -106,9 +106,9 @@
     "SubscriptionPlanLimit": "您的订阅积分已用尽，无法使用该功能，请升级到更高计划，或配置自定义模型 API 后继续使用",
     "InvalidGithubToken": "Github PAT 不正确或为空，请检查 Github PAT 后重试",
     "ConnectionCheckFailed": "请求返回为空，请检查 API 代理地址末尾是否未包含 `/v1`",
-    "SubscriptionRequired": "您需要订阅才能使用此功能。请升级您的账户以获得访问权限。",
+    "SubscriptionRequired": "您需要订阅才能使用此功能。请订阅计划获得访问权限。",
     "SubscriptionExpired": "您的订阅已过期。请续订以继续使用此功能。",
-    "SubscriptionLimited": "您的当月积分已用尽。请升级您的账户以获得更多积分或等待下个月重置。",
+    "SubscriptionLimited": "您的积分已用完，请升级计划获得更多积分或等待下个周期重置。",
     "SubscriptionError": "订阅请求出错，请联系管理员解决"
   },
   "stt": {

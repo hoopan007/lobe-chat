@@ -82,8 +82,18 @@ export const useErrorContent = (error: any) => {
   return useMemo<AlertProps | undefined>(() => {
     if (!error) return;
     const messageError = error;
+    
+    
 
     const alertConfig = getErrorAlertConfig(messageError.type);
+
+    if (messageError.type === AgentRuntimeErrorType.ProviderBizError && 
+        messageError?.body?.error?.code === 'insufficient_user_quota') {
+      return {
+        message: t(`response.${ChatErrorType.SubscriptionLimited}` as any, { provider: providerName }),
+        ...alertConfig,
+      };
+    }
 
     return {
       message: t(`response.${messageError.type}` as any, { provider: providerName }),
@@ -126,6 +136,17 @@ const ErrorMessageExtra = memo<{ data: ChatMessage }>(({ data }) => {
     case AgentRuntimeErrorType.NoOpenAIAPIKey: {
       {
         return <InvalidAPIKey id={data.id} provider={data.error?.body?.provider} />;
+      }
+    }
+
+    case AgentRuntimeErrorType.ProviderBizError: {
+      // 处理额度不足
+      if (data.error?.body?.error?.code === 'insufficient_user_quota') {
+        const insufficientUserQuotaError = {
+          ...data.error,
+          type: ChatErrorType.SubscriptionLimited,
+        };
+        return <SubscriptionError error={insufficientUserQuotaError} id={data.id} />;
       }
     }
   }

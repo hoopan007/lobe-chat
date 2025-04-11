@@ -106,9 +106,9 @@
     "SubscriptionPlanLimit": "Your subscription points have been exhausted, and you cannot use this feature. Please upgrade to a higher plan or configure a custom model API to continue using it.",
     "SystemTimeNotMatchError": "Sorry, your system time does not match the server. Please check your system time and try again.",
     "UnknownChatFetchError": "Sorry, an unknown request error occurred. Please check the information below or try again.",
-    "SubscriptionRequired": "You need to subscribe to use this feature. Please upgrade your account to gain access.",
+    "SubscriptionRequired": "You need to subscribe to use this feature. Please subscribe to the plan to gain access.",
     "SubscriptionExpired": "Your subscription has expired. Please renew to continue using this feature.",
-    "SubscriptionLimited": "Your monthly credits have been exhausted. Please upgrade your account to gain more credits or wait for the next month to reset.",
+    "SubscriptionLimited": "Your credits have been exhausted. Please upgrade your plan to gain more credits or wait for the next cycle to reset.",
     "SubscriptionError": "Subscription request error, please contact the administrator to solve"
   },
   "stt": {
