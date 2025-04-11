@@ -165,8 +165,7 @@ export const initAgentRuntimeWithUserPayload = async (
         // 不要抛出普通错误，使用createErrorResponse
         throw {
           body: { 
-            provider,
-            subscriptionStatus
+            provider
           },
           errorType,
           message: `User subscription error: ${subscriptionStatus}`

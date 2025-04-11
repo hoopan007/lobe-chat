@@ -136,6 +136,12 @@
       "placeholder": "请输入密码",
       "title": "输入密码解锁应用"
     },
+    "subscription": {
+      "subscriptionError": "查看方案",
+      "subscriptionExpired": "续订订阅",
+      "subscriptionLimited": "升级计划",
+      "subscriptionRequired": "立即订阅"
+    },
     "tabs": {
       "apiKey": "自定义 API Key",
       "password": "密码"
@@ -149,19 +155,5 @@
     "title": "文件上传失败，请检查网络连接或稍后再试",
     "unknownError": "错误原因: {{reason}}",
     "uploadFailed": "文件上传失败"
-  },
-  "subscription": {
-    "cta": {
-      "inactive": "立即订阅",
-      "expired": "续订订阅",
-      "upgrade": "升级计划",
-      "limited": "升级计划"
-    },
-    "links": {
-      "inactive": "https://lobehub.com/pricing",
-      "expired": "https://lobehub.com/pricing",
-      "upgrade": "https://lobehub.com/pricing",
-      "limited": "https://lobehub.com/pricing"
-    }
   }
 }

@@ -136,6 +136,12 @@
       "placeholder": "Please enter password",
       "title": "Enter Password to Unlock Application"
     },
+    "subscription": {
+      "subscriptionError": "View Plan",
+      "subscriptionExpired": "Renew Subscription",
+      "subscriptionLimited": "Upgrade Plan",
+      "subscriptionRequired": "Subscribe Now"
+    },
     "tabs": {
       "apiKey": "Custom API Key",
       "password": "Password"
@@ -149,19 +155,5 @@
     "title": "File upload failed. Please check your network connection or try again later",
     "unknownError": "Error reason: {{reason}}",
     "uploadFailed": "File upload failed."
-  },
-  "subscription": {
-    "cta": {
-      "inactive": "Subscribe Now",
-      "expired": "Renew Subscription",
-      "upgrade": "Upgrade Plan",
-      "limited": "Upgrade Plan"
-    },
-    "links": {
-      "inactive": "https://lobehub.com/pricing",
-      "expired": "https://lobehub.com/pricing",
-      "upgrade": "https://lobehub.com/pricing",
-      "limited": "https://lobehub.com/pricing"
-    }
   }
 }

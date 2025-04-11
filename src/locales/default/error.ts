@@ -166,6 +166,12 @@ export default {
       placeholder: '请输入密码',
       title: '输入密码解锁应用',
     },
+    subscription: {
+      subscriptionError: '查看方案',
+      subscriptionExpired: '续订订阅',
+      subscriptionLimited: '升级计划',
+      subscriptionRequired: '立即订阅',
+    },
     tabs: {
       apiKey: '自定义 API Key',
       password: '密码',

@@ -38,6 +38,17 @@ const getErrorAlertConfig = (
   /* ↑ cloud slot ↑ */
 
   switch (errorType) {
+    case ChatErrorType.SubscriptionRequired:
+    case ChatErrorType.SubscriptionExpired:
+    case ChatErrorType.SubscriptionLimited:
+    case ChatErrorType.SubscriptionError: {
+      return {
+        extraDefaultExpand: true,
+        extraIsolate: true,
+        type: 'warning',
+      };
+    }
+      
     case ChatErrorType.SystemTimeNotMatchError:
     case AgentRuntimeErrorType.PermissionDenied:
     case AgentRuntimeErrorType.InsufficientQuota:
@@ -98,10 +109,9 @@ const ErrorMessageExtra = memo<{ data: ChatMessage }>(({ data }) => {
     case ChatErrorType.SubscriptionExpired:
     case ChatErrorType.SubscriptionLimited:
     case ChatErrorType.SubscriptionError: {
-      console.log('subscription error', error)
       return <SubscriptionError 
-        id={data.id} 
-        subscriptionStatus={error?.body?.subscriptionStatus} 
+        error={error}
+        id={data.id}
       />;
     }
 
