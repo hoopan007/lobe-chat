@@ -19,21 +19,23 @@ interface SubscriptionErrorProps {
 const SubscriptionError = memo<SubscriptionErrorProps>(({ error, id }) => {
   const { t } = useTranslation('error');
   const [deleteMessage] = useChatStore((s) => [s.deleteMessage]);
-  const slarkUrl = process.env.NEXT_PUBLIC_SLARK_URL;
+  const slarkUrl = process.env.NEXT_PUBLIC_SLARK_URL ?? '';
+  const slarkSettingsUrl = (process.env.NEXT_PUBLIC_SLARK_URL ?? '') + (process.env.NEXT_PUBLIC_SLARK_PATH_SETTINGS ?? '');
+  const slarkPricingUrl = (process.env.NEXT_PUBLIC_SLARK_URL ?? '') + (process.env.NEXT_PUBLIC_SLARK_PATH_PRICING ?? '');
   
   let targetUrl = slarkUrl;
   let buttonText = t('unlock.subscription.subscriptionError');
   switch (error?.type) {
     case ChatErrorType.SubscriptionRequired:
-      targetUrl = `${slarkUrl}?test=1`;
+      targetUrl = slarkPricingUrl;
       buttonText = t('unlock.subscription.subscriptionRequired');
       break;
     case ChatErrorType.SubscriptionExpired:
-      targetUrl = `${slarkUrl}?test=2`;
+      targetUrl = slarkSettingsUrl;
       buttonText = t('unlock.subscription.subscriptionExpired');
       break;
     case ChatErrorType.SubscriptionLimited:
-      targetUrl = `${slarkUrl}?test=3`;
+      targetUrl = slarkSettingsUrl;
       buttonText = t('unlock.subscription.subscriptionLimited');
       break;
     default:
