@@ -1,20 +1,8 @@
 import { getLLMConfig } from '@/config/llm';
 import { JWTPayload } from '@/const/auth';
-<<<<<<< HEAD
-import { INBOX_SESSION_ID } from '@/const/session';
-import {
-  LOBE_CHAT_OBSERVATION_ID,
-  LOBE_CHAT_TRACE_ID,
-  TracePayload,
-  TraceTagMap,
-} from '@/const/trace';
-import { AgentRuntime, ChatStreamPayload, ModelProvider } from '@/libs/agent-runtime';
-import { getUserSubscription } from '@/libs/api/rylai';
-import { TraceClient } from '@/libs/traces';
-import { ChatErrorType } from '@/types/fetch';
-=======
 import { AgentRuntime, ModelProvider } from '@/libs/agent-runtime';
->>>>>>> upstream/main
+import { getUserSubscription } from '@/libs/api/rylai';
+import { ChatErrorType } from '@/types/fetch';
 
 import apiKeyManager from './apiKeyManager';
 
