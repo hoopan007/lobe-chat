@@ -1,10 +1,10 @@
 name: Publish Database Docker Image for ARM
 
 on:
-  push:
-    tags:
-      - '*'
-      - '!*-alpha*'
+  # push:
+  #   tags:
+  #     - '*'
+  #     - '!*-alpha*'
   workflow_dispatch:
     inputs:
       name:
