@@ -59,8 +59,10 @@ jobs:
             type=raw,value=latest
             type=ref,event=tag
 
-      - name: Build and export
-        id: build
+      # AMD64构建（使用缓存）
+      - name: Build and export (with cache) - AMD64
+        id: build-amd64
+        if: matrix.platform == 'linux/amd64'
         uses: docker/build-push-action@v5
         with:
           platforms: ${{ matrix.platform }}
@@ -71,11 +73,32 @@ jobs:
           cache-from: type=gha
           cache-to: type=gha,mode=max
 
-      - name: Export digest
+      # ARM64构建（不使用缓存）
+      - name: Build and export (no cache) - ARM64
+        id: build-arm64
+        if: matrix.platform == 'linux/arm64'
+        uses: docker/build-push-action@v5
+        with:
+          platforms: ${{ matrix.platform }}
+          context: .
+          file: ./Dockerfile.database
+          labels: ${{ steps.meta.outputs.labels }}
+          outputs: type=image,name=${{ env.REGISTRY_IMAGE }},push-by-digest=true,name-canonical=true,push=true
+
+      - name: Export digest (AMD64)
+        if: matrix.platform == 'linux/amd64'
         run: |
           rm -rf /tmp/digests
           mkdir -p /tmp/digests
-          digest="${{ steps.build.outputs.digest }}"
+          digest="${{ steps.build-amd64.outputs.digest }}"
+          touch "/tmp/digests/${digest#sha256:}"
+
+      - name: Export digest (ARM64)
+        if: matrix.platform == 'linux/arm64'
+        run: |
+          rm -rf /tmp/digests
+          mkdir -p /tmp/digests
+          digest="${{ steps.build-arm64.outputs.digest }}"
           touch "/tmp/digests/${digest#sha256:}"
 
       - name: Upload artifact
