@@ -538,11 +538,6 @@ export const generateAIChat: StateCreator<
       ? agentConfig.params.max_tokens
       : undefined;
 
-    // 5. handle reasoning_effort
-    agentConfig.params.reasoning_effort = chatConfig.enableReasoningEffort
-      ? agentConfig.params.reasoning_effort
-      : undefined;
-
     let isFunctionCall = false;
     let msgTraceId: string | undefined;
     let output = '';
@@ -552,7 +547,9 @@ export const generateAIChat: StateCreator<
     // to upload image
     const uploadTasks: Map<string, Promise<{ id?: string; url?: string }>> = new Map();
 
-    const historySummary = topicSelectors.currentActiveTopicSummary(get());
+    const historySummary = chatConfig.enableCompressHistory
+      ? topicSelectors.currentActiveTopicSummary(get())
+      : undefined;
     await chatService.createAssistantMessageStream({
       abortController,
       params: {
@@ -677,7 +674,15 @@ export const generateAIChat: StateCreator<
             // if there is no duration, it means the end of reasoning
             if (!duration) {
               duration = Date.now() - thinkingStartAt;
-              internal_toggleChatReasoning(false, messageId, n('generateMessage(end)') as string);
+
+              const isInChatReasoning = chatSelectors.isMessageInChatReasoning(messageId)(get());
+              if (isInChatReasoning) {
+                internal_toggleChatReasoning(
+                  false,
+                  messageId,
+                  n('toggleChatReasoning/false') as string,
+                );
+              }
             }
 
             internal_dispatchMessage({
@@ -695,7 +700,11 @@ export const generateAIChat: StateCreator<
             // if there is no thinkingStartAt, it means the start of reasoning
             if (!thinkingStartAt) {
               thinkingStartAt = Date.now();
-              internal_toggleChatReasoning(true, messageId, n('generateMessage(end)') as string);
+              internal_toggleChatReasoning(
+                true,
+                messageId,
+                n('toggleChatReasoning/true') as string,
+              );
             }
 
             thinking += chunk.text;

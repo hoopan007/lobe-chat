@@ -14,7 +14,7 @@ import {
   AgentRuntimeError,
   ChatCompletionErrorPayload,
   ModelProvider,
-} from '@/libs/agent-runtime';
+} from '@/libs/model-runtime';
 import { filesPrompts } from '@/prompts/files';
 import { BuiltinSystemRolePrompts } from '@/prompts/systemRole';
 import { getAgentStoreState } from '@/store/agent';
@@ -225,17 +225,29 @@ class ChatService {
       )(getAiInfraStoreState());
       // if model has extended params, then we need to check if the model can use reasoning
 
-      if (modelExtendParams!.includes('enableReasoning') && chatConfig.enableReasoning) {
-        extendParams.thinking = {
-          budget_tokens: chatConfig.reasoningBudgetToken || 1024,
-          type: 'enabled',
-        };
+      if (modelExtendParams!.includes('enableReasoning')) {
+        if (chatConfig.enableReasoning) {
+          extendParams.thinking = {
+            budget_tokens: chatConfig.reasoningBudgetToken || 1024,
+            type: 'enabled',
+          };
+        } else {
+          extendParams.thinking = {
+            budget_tokens: 0,
+            type: 'disabled',
+          };
+        }
       }
+
       if (
         modelExtendParams!.includes('disableContextCaching') &&
         chatConfig.disableContextCaching
       ) {
         extendParams.enabledContextCaching = false;
+      }
+
+      if (modelExtendParams!.includes('reasoningEffort') && chatConfig.reasoningEffort) {
+        extendParams.reasoning_effort = chatConfig.reasoningEffort;
       }
     }
 
@@ -287,8 +299,8 @@ class ChatService {
     const providersWithDeploymentName = [
       ModelProvider.Azure,
       ModelProvider.Volcengine,
-      ModelProvider.Doubao,
       ModelProvider.AzureAI,
+      ModelProvider.Qwen,
     ] as string[];
 
     if (providersWithDeploymentName.includes(provider)) {
