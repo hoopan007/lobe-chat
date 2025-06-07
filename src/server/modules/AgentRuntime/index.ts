@@ -137,17 +137,21 @@ export const initAgentRuntimeWithUserPayload = async (
         
         // 根据状态设置不同的错误类型
         switch (subscriptionStatus) {
-          case '401':
+          case '401': {
             errorType = ChatErrorType.SubscriptionRequired as any;
             break;
-          case '402':
+          }
+          case '402': {
             errorType = ChatErrorType.SubscriptionExpired as any;
             break;
-          case '403':
+          }
+          case '403': {
             errorType = ChatErrorType.SubscriptionLimited as any;
             break;
-          default:
+          }
+          default: {
             errorType = ChatErrorType.SubscriptionError as any;
+          }
         }
         
         // 不要抛出普通错误，使用createErrorResponse

@@ -14,6 +14,8 @@ import {
   LogOut,
   Mail,
   Settings2,
+  Map,
+  ChartPie,
 } from 'lucide-react';
 import Link from 'next/link';
 import { PropsWithChildren, memo } from 'react';
@@ -42,6 +44,9 @@ import { useUserStore } from '@/store/user';
 import { authSelectors } from '@/store/user/selectors';
 
 import { useNewVersion } from './useNewVersion';
+
+const slarkSettingsUrl = (process.env.NEXT_PUBLIC_SLARK_URL ?? '') + (process.env.NEXT_PUBLIC_SLARK_PATH_SETTINGS ?? '');
+const slarkPricingUrl = (process.env.NEXT_PUBLIC_SLARK_URL ?? '') + (process.env.NEXT_PUBLIC_SLARK_PATH_PRICING ?? '');
 
 const NewVersionBadge = memo(
   ({
@@ -104,6 +109,29 @@ export const useMenu = () => {
   ];
 
   /* ↓ cloud slot ↓ */
+
+  // 跳转至Saas网站
+  const plans: MenuProps['items'] = [
+    {
+      icon: <Icon icon={Map} />,
+      key: 'plans',
+      label: t('userPanel.plans'),
+      onClick: () => {
+        window.open(slarkPricingUrl, '_blank');
+      },
+    },
+  ];
+
+  const usages: MenuProps['items'] = [
+    {
+      icon: <Icon icon={ChartPie} />,
+      key: 'usages',
+      label: t('userPanel.usages'),
+      onClick: () => {
+        window.open(slarkSettingsUrl, '_blank');
+      },
+    },
+  ];
 
   /* ↑ cloud slot ↑ */
 
@@ -202,7 +230,8 @@ export const useMenu = () => {
     ...(!enableAuth || (enableAuth && isLoginWithAuth) ? profile : []),
     ...(isLogin ? settings : []),
     /* ↓ cloud slot ↓ */
-
+    ...plans,
+    ...usages,
     /* ↑ cloud slot ↑ */
     ...(canInstall ? pwa : []),
     ...data,
