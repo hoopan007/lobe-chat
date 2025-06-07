@@ -5,7 +5,7 @@
 export const LOBE_CHAT_CLOUD = 'FlowMind';
 
 export const BRANDING_NAME = 'FlowMind';
-export const BRANDING_LOGO_URL = '';
+export const BRANDING_LOGO_URL = '/icons/icon-192x192.png';
 
 export const ORG_NAME = 'FlowMind';
 
