@@ -230,8 +230,8 @@ export const useMenu = () => {
     ...(!enableAuth || (enableAuth && isLoginWithAuth) ? profile : []),
     ...(isLogin ? settings : []),
     /* ↓ cloud slot ↓ */
-    ...plans,
-    ...usages,
+    ...(isLogin ? plans : []),
+    ...(isLogin ? usages : []),
     /* ↑ cloud slot ↑ */
     ...(canInstall ? pwa : []),
     ...data,
