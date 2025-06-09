@@ -45,9 +45,6 @@ import { authSelectors } from '@/store/user/selectors';
 
 import { useNewVersion } from './useNewVersion';
 
-const slarkSettingsUrl = (process.env.NEXT_PUBLIC_SLARK_URL ?? '') + (process.env.NEXT_PUBLIC_SLARK_PATH_SETTINGS ?? '');
-const slarkPricingUrl = (process.env.NEXT_PUBLIC_SLARK_URL ?? '') + (process.env.NEXT_PUBLIC_SLARK_PATH_PRICING ?? '');
-
 const NewVersionBadge = memo(
   ({
     children,
@@ -79,6 +76,14 @@ export const useMenu = () => {
     authSelectors.isLogin(s),
     authSelectors.isLoginWithAuth(s),
   ]);
+
+  // 在hook内部获取环境变量，避免构建时静态替换
+  const slarkBaseUrl = process.env.NEXT_PUBLIC_SLARK_URL || '';
+  const slarkSettingsPath = process.env.NEXT_PUBLIC_SLARK_PATH_SETTINGS || '/settings';
+  const slarkPricingPath = process.env.NEXT_PUBLIC_SLARK_PATH_PRICING || '/pricing';
+  
+  const slarkSettingsUrl = slarkBaseUrl + slarkSettingsPath;
+  const slarkPricingUrl = slarkBaseUrl + slarkPricingPath;
 
   const profile: MenuProps['items'] = [
     {
@@ -117,6 +122,7 @@ export const useMenu = () => {
       key: 'plans',
       label: t('userPanel.plans'),
       onClick: () => {
+        console.log('slarkPricingUrl', slarkPricingUrl);
         window.open(slarkPricingUrl, '_blank');
       },
     },
@@ -128,6 +134,7 @@ export const useMenu = () => {
       key: 'usages',
       label: t('userPanel.usages'),
       onClick: () => {
+        console.log('slarkSettingsUrl', slarkSettingsUrl);
         window.open(slarkSettingsUrl, '_blank');
       },
     },

@@ -19,11 +19,16 @@ interface SubscriptionErrorProps {
 const SubscriptionError = memo<SubscriptionErrorProps>(({ error, id }) => {
   const { t } = useTranslation('error');
   const [deleteMessage] = useChatStore((s) => [s.deleteMessage]);
-  const slarkUrl = process.env.NEXT_PUBLIC_SLARK_URL ?? '';
-  const slarkSettingsUrl = (process.env.NEXT_PUBLIC_SLARK_URL ?? '') + (process.env.NEXT_PUBLIC_SLARK_PATH_SETTINGS ?? '');
-  const slarkPricingUrl = (process.env.NEXT_PUBLIC_SLARK_URL ?? '') + (process.env.NEXT_PUBLIC_SLARK_PATH_PRICING ?? '');
   
-  let targetUrl = slarkUrl;
+  // 在组件内部获取环境变量，避免构建时静态替换
+  const slarkBaseUrl = process.env.NEXT_PUBLIC_SLARK_URL || '';
+  const slarkSettingsPath = process.env.NEXT_PUBLIC_SLARK_PATH_SETTINGS || '/settings';
+  const slarkPricingPath = process.env.NEXT_PUBLIC_SLARK_PATH_PRICING || '/pricing';
+  
+  const slarkSettingsUrl = slarkBaseUrl + slarkSettingsPath;
+  const slarkPricingUrl = slarkBaseUrl + slarkPricingPath;
+  
+  let targetUrl = slarkBaseUrl;
   let buttonText = t('unlock.subscription.subscriptionError');
   switch (error?.type) {
     case ChatErrorType.SubscriptionRequired: {
@@ -53,6 +58,7 @@ const SubscriptionError = memo<SubscriptionErrorProps>(({ error, id }) => {
           block
           icon={<Icon icon={ExternalLink} />}
           onClick={() => {
+            console.log('targetUrl', targetUrl);
             window.open(targetUrl, '_blank');
           }}
           type={'primary'}
