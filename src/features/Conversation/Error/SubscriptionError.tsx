@@ -26,20 +26,24 @@ const SubscriptionError = memo<SubscriptionErrorProps>(({ error, id }) => {
   let targetUrl = slarkUrl;
   let buttonText = t('unlock.subscription.subscriptionError');
   switch (error?.type) {
-    case ChatErrorType.SubscriptionRequired:
+    case ChatErrorType.SubscriptionRequired: {
       targetUrl = slarkPricingUrl;
       buttonText = t('unlock.subscription.subscriptionRequired');
       break;
-    case ChatErrorType.SubscriptionExpired:
+    }
+    case ChatErrorType.SubscriptionExpired: {
       targetUrl = slarkSettingsUrl;
       buttonText = t('unlock.subscription.subscriptionExpired');
       break;
-    case ChatErrorType.SubscriptionLimited:
+    }
+    case ChatErrorType.SubscriptionLimited: {
       targetUrl = slarkSettingsUrl;
       buttonText = t('unlock.subscription.subscriptionLimited');
       break;
-    default:
+    }
+    default: {
       break;
+    }
   }
   
   return (
