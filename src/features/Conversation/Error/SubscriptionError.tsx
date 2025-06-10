@@ -5,6 +5,7 @@ import { memo } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Flexbox } from 'react-layout-kit';
 
+import { useSlarkConfig } from '@/hooks/useSlarkConfig';
 import { useChatStore } from '@/store/chat';
 import { ChatMessageError } from '@/types/message/chat';
 import { ChatErrorType } from '@/types/fetch';
@@ -19,11 +20,12 @@ interface SubscriptionErrorProps {
 const SubscriptionError = memo<SubscriptionErrorProps>(({ error, id }) => {
   const { t } = useTranslation('error');
   const [deleteMessage] = useChatStore((s) => [s.deleteMessage]);
+  const { config: slarkConfig } = useSlarkConfig();
   
-  // 在组件内部获取环境变量，避免构建时静态替换
-  const slarkBaseUrl = process.env.NEXT_PUBLIC_SLARK_URL || '';
-  const slarkSettingsPath = process.env.NEXT_PUBLIC_SLARK_PATH_SETTINGS || '';
-  const slarkPricingPath = process.env.NEXT_PUBLIC_SLARK_PATH_PRICING || '';
+  // 从运行时配置获取 Slark 相关 URL，解决生产环境环境变量无法获取的问题
+  const slarkBaseUrl = slarkConfig?.NEXT_PUBLIC_SLARK_URL || '';
+  const slarkSettingsPath = slarkConfig?.NEXT_PUBLIC_SLARK_PATH_SETTINGS || '';
+  const slarkPricingPath = slarkConfig?.NEXT_PUBLIC_SLARK_PATH_PRICING || '';
   
   const slarkSettingsUrl = slarkBaseUrl + slarkSettingsPath;
   const slarkPricingUrl = slarkBaseUrl + slarkPricingPath;

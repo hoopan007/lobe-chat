@@ -39,6 +39,7 @@ import {
 import { isDesktop } from '@/const/version';
 import DataImporter from '@/features/DataImporter';
 import { usePWAInstall } from '@/hooks/usePWAInstall';
+import { useSlarkConfig } from '@/hooks/useSlarkConfig';
 import { featureFlagsSelectors, useServerConfigStore } from '@/store/serverConfig';
 import { useUserStore } from '@/store/user';
 import { authSelectors } from '@/store/user/selectors';
@@ -72,15 +73,16 @@ export const useMenu = () => {
   const hasNewVersion = useNewVersion();
   const { t } = useTranslation(['common', 'setting', 'auth']);
   const { showCloudPromotion, hideDocs } = useServerConfigStore(featureFlagsSelectors);
+  const { config: slarkConfig } = useSlarkConfig();
   const [isLogin, isLoginWithAuth] = useUserStore((s) => [
     authSelectors.isLogin(s),
     authSelectors.isLoginWithAuth(s),
   ]);
 
-  // 在hook内部获取环境变量，避免构建时静态替换
-  const slarkBaseUrl = process.env.NEXT_PUBLIC_SLARK_URL || '';
-  const slarkSettingsPath = process.env.NEXT_PUBLIC_SLARK_PATH_SETTINGS || '';
-  const slarkPricingPath = process.env.NEXT_PUBLIC_SLARK_PATH_PRICING || '';
+  // 从运行时配置获取 Slark 相关 URL，解决生产环境环境变量无法获取的问题
+  const slarkBaseUrl = slarkConfig?.NEXT_PUBLIC_SLARK_URL || '';
+  const slarkSettingsPath = slarkConfig?.NEXT_PUBLIC_SLARK_PATH_SETTINGS || '';
+  const slarkPricingPath = slarkConfig?.NEXT_PUBLIC_SLARK_PATH_PRICING || '';
 
   const slarkSettingsUrl = slarkBaseUrl + slarkSettingsPath;
   const slarkPricingUrl = slarkBaseUrl + slarkPricingPath;
