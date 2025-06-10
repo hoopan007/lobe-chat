@@ -22,8 +22,8 @@ const SubscriptionError = memo<SubscriptionErrorProps>(({ error, id }) => {
   
   // 在组件内部获取环境变量，避免构建时静态替换
   const slarkBaseUrl = process.env.NEXT_PUBLIC_SLARK_URL || '';
-  const slarkSettingsPath = process.env.NEXT_PUBLIC_SLARK_PATH_SETTINGS || '/settings';
-  const slarkPricingPath = process.env.NEXT_PUBLIC_SLARK_PATH_PRICING || '/pricing';
+  const slarkSettingsPath = process.env.NEXT_PUBLIC_SLARK_PATH_SETTINGS || '';
+  const slarkPricingPath = process.env.NEXT_PUBLIC_SLARK_PATH_PRICING || '';
   
   const slarkSettingsUrl = slarkBaseUrl + slarkSettingsPath;
   const slarkPricingUrl = slarkBaseUrl + slarkPricingPath;
