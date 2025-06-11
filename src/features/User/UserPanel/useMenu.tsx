@@ -80,9 +80,9 @@ export const useMenu = () => {
   ]);
 
   // 从运行时配置获取 Slark 相关 URL，解决生产环境环境变量无法获取的问题
-  const slarkBaseUrl = slarkConfig?.NEXT_PUBLIC_SLARK_URL || '';
-  const slarkSettingsPath = slarkConfig?.NEXT_PUBLIC_SLARK_PATH_SETTINGS || '';
-  const slarkPricingPath = slarkConfig?.NEXT_PUBLIC_SLARK_PATH_PRICING || '';
+  const slarkBaseUrl = slarkConfig?.SLARK_URL || '';
+  const slarkSettingsPath = slarkConfig?.SLARK_PATH_SETTINGS || '';
+  const slarkPricingPath = slarkConfig?.SLARK_PATH_PRICING || '';
 
   const slarkSettingsUrl = slarkBaseUrl + slarkSettingsPath;
   const slarkPricingUrl = slarkBaseUrl + slarkPricingPath;
