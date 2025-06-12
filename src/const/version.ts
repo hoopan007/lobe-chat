@@ -1,4 +1,4 @@
-import pkg from '@/../package.json' with { type: 'json' };
+import pkg from '@/../package.json';
 
 import { BRANDING_NAME, ORG_NAME } from './branding';
 
