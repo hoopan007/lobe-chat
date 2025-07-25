@@ -25,7 +25,7 @@ import { Flexbox } from 'react-layout-kit';
 import type { MenuProps } from '@/components/Menu';
 import { enableAuth } from '@/const/auth';
 import { BRANDING_EMAIL, LOBE_CHAT_CLOUD, SOCIAL_URL } from '@/const/branding';
-import { DEFAULT_HOTKEY_CONFIG } from '@/const/settings';
+import { DEFAULT_DESKTOP_HOTKEY_CONFIG } from '@/const/desktop';
 import {
   CHANGELOG,
   DOCUMENTS_REFER_URL,
@@ -97,7 +97,7 @@ export const useMenu = () => {
     {
       extra: isDesktop ? (
         <div>
-          <Hotkey keys={DEFAULT_HOTKEY_CONFIG.openSettings} />
+          <Hotkey keys={DEFAULT_DESKTOP_HOTKEY_CONFIG.openSettings} />
         </div>
       ) : undefined,
       icon: <Icon icon={Settings2} />,

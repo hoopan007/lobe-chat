@@ -24,7 +24,7 @@ export const createAsyncServerClient = async (userId: string, payload: JWTPayloa
     headers['x-vercel-protection-bypass'] = process.env.VERCEL_AUTOMATION_BYPASS_SECRET;
   }
 
-  return createTRPCClient<AsyncRouter>({
+  const client = createTRPCClient<AsyncRouter>({
     links: [
       httpLink({
         headers,
@@ -33,6 +33,8 @@ export const createAsyncServerClient = async (userId: string, payload: JWTPayloa
       }),
     ],
   });
+
+  return client;
 };
 
 /**
