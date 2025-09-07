@@ -1,4 +1,5 @@
 import { ModelProvider, ModelRuntime } from '@lobechat/model-runtime';
+import { ClientSecretPayload } from '@lobechat/types';
 
 import { getLLMConfig } from '@/config/llm';
 import { getUserSubscription } from '@/libs/api/rylai';
