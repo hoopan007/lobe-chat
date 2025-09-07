@@ -4,7 +4,6 @@ import { ClientSecretPayload } from '@lobechat/types';
 import { getLLMConfig } from '@/config/llm';
 import { getUserSubscription } from '@/libs/api/rylai';
 import { ChatErrorType } from '@/types/fetch';
-import { ClientSecretPayload } from '@/const/auth';
 
 import apiKeyManager from './apiKeyManager';
 
