@@ -7,7 +7,7 @@ import { Flexbox } from 'react-layout-kit';
 
 import { useSlarkConfig } from '@/hooks/useSlarkConfig';
 import { useChatStore } from '@/store/chat';
-import { ChatMessageError } from '@/types/message/chat';
+import { ChatMessageError } from '@/types/message';
 import { ChatErrorType } from '@/types/fetch';
 
 import { ErrorActionContainer } from './style';
