@@ -4,6 +4,7 @@ import { migrate } from 'drizzle-orm/node-postgres/migrator';
 import { join } from 'node:path';
 import { Client } from 'pg';
 
+// @ts-ignore tsgo handle esm import cjs and compatibility issues
 import { DB_FAIL_INIT_HINT, PGVECTOR_HINT } from './errorHint';
 
 // Read the `.env` file if it exists, or a file specified by the
