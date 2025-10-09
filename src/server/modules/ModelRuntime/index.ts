@@ -130,6 +130,8 @@ export const initModelRuntimeWithUserPayload = async (
   payload: ClientSecretPayload,
   params: any = {},
 ) => {
+  const runtimeProvider = payload.runtimeProvider ?? provider;
+
   // user subscription
   if (payload.userId) {
     try {
@@ -180,8 +182,9 @@ export const initModelRuntimeWithUserPayload = async (
     }
   }
 
-  return ModelRuntime.initializeWithProvider(provider, {
-    ...getParamsFromPayload(provider, payload),
+
+  return ModelRuntime.initializeWithProvider(runtimeProvider, {
+    ...getParamsFromPayload(runtimeProvider, payload),
     ...params,
   });
 };
