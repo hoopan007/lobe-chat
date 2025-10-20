@@ -168,7 +168,6 @@ export const initModelRuntimeWithUserPayload = async (
 ) => {
   const runtimeProvider = payload.runtimeProvider ?? provider;
 
-<<<<<<< HEAD
   // user subscription
   if (payload.userId) {
     try {
@@ -219,8 +218,6 @@ export const initModelRuntimeWithUserPayload = async (
     }
   }
 
-
-=======
   if (runtimeProvider === ModelProvider.VertexAI) {
     const vertexOptions = buildVertexOptions(payload, params);
     const runtime = LobeVertexAI.initFromVertexAI(vertexOptions);
@@ -228,7 +225,6 @@ export const initModelRuntimeWithUserPayload = async (
     return new ModelRuntime(runtime);
   }
 
->>>>>>> upstream/main
   return ModelRuntime.initializeWithProvider(runtimeProvider, {
     ...getParamsFromPayload(runtimeProvider, payload),
     ...params,

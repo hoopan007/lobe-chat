@@ -52,12 +52,7 @@ export const aiChatRouter = router({
       throw new TRPCError({ code: 'BAD_REQUEST', message: 'keyVaultsPayload is not correct' });
     }
 
-<<<<<<< HEAD
     const modelRuntime = await initModelRuntimeWithUserPayload(input.provider, payload);
-=======
-    log('initializing model runtime with provider: %s', input.provider);
-    const modelRuntime = initModelRuntimeWithUserPayload(input.provider, payload);
->>>>>>> upstream/main
 
     log('calling generateObject');
     const result = await modelRuntime.generateObject({
